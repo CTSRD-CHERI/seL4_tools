@@ -43,4 +43,4 @@ extern struct elfloader_driver *__stop__driver_list[];
 
 #define ELFLOADER_DRIVER(_name) \
     const struct elfloader_driver *_driver_list_##_name \
-        __attribute__((unused,section("_driver_list"))) = &_name;
+        __attribute__((unused,retain,section("_driver_list"))) = &_name;
