@@ -29,7 +29,7 @@ function(check_arch_clang)
                 correct_triple
                 ${TRIPLE}
         )
-    elseif("${KernelSel4Arch}" STREQUAL "aarch64")
+    elseif("${KernelSel4Arch}" STREQUAL "aarch64" OR "${KernelSel4Arch}" STREQUAL "morello")
         string(
             REGEX
                 MATCH
