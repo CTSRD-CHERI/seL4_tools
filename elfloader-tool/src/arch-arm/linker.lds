@@ -11,12 +11,6 @@
 
 SECTIONS
 {
-    .interp         : { *(.interp) }
-}
-INSERT BEFORE .hash;
-
-SECTIONS
-{
     . = IMAGE_START_ADDR;
     _text = .;
     .start :
@@ -24,7 +18,6 @@ SECTIONS
         *(.text.start)
     }
 }
-INSERT BEFORE .text;
 
 SECTIONS
 {
@@ -48,4 +41,3 @@ SECTIONS
         _archive_end = .;
     }
 }
-INSERT AFTER .eh_frame;
