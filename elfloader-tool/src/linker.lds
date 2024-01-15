@@ -55,15 +55,23 @@ SECTIONS
         *(.data.*)
     }
     . = ALIGN(16);
-    .bss :
+    .bss (NOLOAD) :
     {
+#ifdef CONFIG_ARCH_ARM
+        . = ALIGN(0x1000);
+        core_stack_alloc = .;
+        . += CONFIG_MAX_NUM_NODES * (1 << 12);
+        core_stack_alloc_end = .;
+#endif
         _bss = .;
         *(.sbss*)
         *(.bss)
         *(.bss.*)
         _bss_end = .;
+        _end = .;
     }
-#ifdef CONFIG_ARCH_RISCV32
+
+#ifndef CONFIG_ARCH_RISCV64
     . = ALIGN(16);
     .rodata :
     {
@@ -78,7 +86,7 @@ SECTIONS
         _archive_start = .;
         *(._archive_cpio)
         _archive_end = .;
+        _end = .;
     }
 #endif
-     _end = .;
 }
